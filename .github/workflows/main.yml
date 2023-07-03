@@ -1,0 +1,31 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  test: 
+    name: 'Tests'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          yarn
+          yarn test
+  
+  # deploy:
+  #   name: 'Deploy'
+  #   needs: test
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - run: |
+  #         yarn
+  #         yarn netlify deploy
